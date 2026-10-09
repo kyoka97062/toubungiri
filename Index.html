@@ -400,7 +400,7 @@
             '2. カットごとに刀身を拭く': ['2. カットごとに刀身を拭く', '2. Wipe the blade after each cut', '2. 每切一刀都擦拭刀身', '2. Limpia la hoja después de cada corte', '2. Limpe a lâmina após cada corte'],
             '1カットごとに温かいおしぼりやキッチンペーパーで包丁に付いたクリームをきれいに拭き取るのがプロの鉄則です。': ['1カットごとに温かいおしぼりやキッチンペーパーで包丁に付いたクリームをきれいに拭き取るのがプロの鉄則です。', 'Wipe cream from the blade with a warm towel or kitchen paper after every cut.', '每切一刀后，用温热的毛巾或厨房纸擦净刀上的奶油。', 'Limpia la crema de la hoja con una toalla tibia o papel de cocina después de cada corte.', 'Limpe o creme da lâmina com uma toalha morna ou papel-toalha após cada corte.'],
             '3. イチゴなど固いトッピングの位置': ['3. イチゴなど固いトッピングの位置', '3. Position of firm toppings like strawberries', '3. 草莓等较硬装饰物的位置', '3. Posición de coberturas firmes como fresas', '3. Posição de coberturas firmes, como morangos'],
-            'フルーツがある場合は、先にトッピングを避けるか、ナイフを少し前後するように刃を入れて切ると潰れにくくなります。': ['フルーツがある場合は、先にトッピングを避けるか、ナイフを少し前後するように刃を入れて切ると潰れにくくなります。', 'Avoid fruit toppings first, or use a gentle sawing motion to keep them from getting crushed.', '遇到水果装饰时，可先避开水果，或轻轻前后移动刀刃，减少压坏。', 'Aparta primero la fruta o corta con un suave movimiento de sierra para evitar aplastarla.', 'Afaste as frutas primeiro ou use um leve movimento de serra para evitar esmagá-las.'],
+            'フルーツがある場合は、先にトッピングを避けるか、ナイフを少し前後するように刃を入れて切ると潰れにくくなります。': ['フルーツがある場合は、先にトッピングを避けるか、ナイフを少し前後するように刃を入れて切ると潰れにくくなります。', 'Avoid fruit toppings first, or use a gentle sawing motion to keep them from getting crushed.', '遇到水果装饰时，可先避开水果，或轻轻前後移动刀刃，减少压坏。', 'Aparta primero la fruta o corta con un suave movimiento de sierra para evitar aplastarla.', 'Afaste as frutas primeiro ou use um leve movimento de serra para evitar esmagá-las.'],
             '使い方・利用規約': ['使い方・利用規約', 'How to use · Terms', '使用方法 · 使用条款', 'Cómo usar · Términos', 'Como usar · Termos'],
             '誕生日パーティー、クリスマスのケーキ等のカットにご活用ください。': ['誕生日パーティー、クリスマスのケーキ等のカットにご活用ください。', 'Use this guide for birthday, Christmas, and other celebration cakes.', '可用于生日、圣诞节及其他庆祝活动的蛋糕切分。', 'Usa esta guía para pasteles de cumpleaños, Navidad y otras celebraciones.', 'Use este guia para bolos de aniversário, Natal e outras comemorações.'],
             'URLをコピーしました！': ['URLをコピーしました！', 'URL copied!', '已复制网址！', '¡URL copiada!', 'URL copiada!'],
@@ -575,9 +575,6 @@
         }
 
         // Divide rectangles into equal-area portions.
-        // Each row's height is proportional to the number of portions in that row,
-        // while the row is split into that same number of equal-width cells.
-        // This keeps every cell's area equal, including prime totals such as 7 or 11.
         function drawGridGuide(w, h) {
             ctx.strokeRect(-w, -h, w * 2, h * 2);
             const total = state.slices;
@@ -727,7 +724,7 @@
 
         toggleCameraBtn.addEventListener('click', toggleCamera);
 
-        // Pinch-to-zoom only. The guide center is intentionally not draggable.
+        // Pinch-to-zoom only
         let initialDist = null;
         let initialScale = 1.0;
 
@@ -774,8 +771,11 @@
                     url: window.location.href,
                 }).catch(() => {});
             } else {
-                document.execCommand('copy');
-                showToast(tr('URLをコピーしました！'));
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    showToast(tr('URLをコピーしました！'));
+                }).catch(() => {
+                    showToast(tr('コピーに失敗しました'));
+                });
             }
         });
 
