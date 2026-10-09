@@ -1,13 +1,11 @@
-// 変更前
 function drawRectangleGuide(w, h) {
-    drawGridGuide(w, h);
-}
-
-// 変更後
-function drawRectangleGuide(w, h) {
+    // 1. 長方形の外枠を描画
     ctx.strokeRect(-w, -h, w * 2, h * 2);
+    
+    // 2. 指定された等分数（人数）を取得
     const total = state.slices;
-    // 長辺（w）を等分割してスライス線を描画
+    
+    // 3. 長辺（w）方向に等間隔でスライス線を引く
     for (let i = 1; i < total; i++) {
         const x = -w + (2 * w * i) / total;
         ctx.beginPath();
