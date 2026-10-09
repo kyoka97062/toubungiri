@@ -8,10 +8,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts (Plus Jakarta Sans & Zen Maru Gothic) -->
+    <!-- Google Fonts (Plus Jakarta Sans) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
@@ -30,7 +30,7 @@
                         }
                     },
                     fontFamily: {
-                        sans: ['"Zen Maru Gothic"', '"Plus Jakarta Sans"', 'sans-serif'],
+                        sans: ['"Tsukushi A Round Gothic"', '"Tsukushi B Round Gothic"', '"Tsukushi Gothic"', '"筑紫A丸ゴシック"', '"筑紫ゴシック"', '"Plus Jakarta Sans"', 'sans-serif'],
                     }
                 }
             }
@@ -39,7 +39,7 @@
 
     <style>
         body {
-            font-family: 'Zen Maru Gothic', 'Plus Jakarta Sans', sans-serif;
+            font-family: "Tsukushi A Round Gothic", "Tsukushi B Round Gothic", "Tsukushi Gothic", "筑紫A丸ゴシック", "筑紫ゴシック", "Plus Jakarta Sans", sans-serif;
             background-color: #f8fafc;
             color: #1e293b;
             -webkit-tap-highlight-color: transparent;
@@ -92,7 +92,6 @@
         /* Tablet layout: use the wider screen instead of keeping a phone-sized column */
         @media (min-width: 768px) {
             body > header,
-            body > div.w-full.max-w-md.px-5.my-1,
             body > footer {
                 max-width: 1100px !important;
             }
@@ -117,8 +116,7 @@
             }
             main.max-w-md > .warica-card:nth-of-type(1) { grid-column: 1; }
             main.max-w-md > .warica-card:nth-of-type(2) { grid-column: 2; grid-row: 1 / span 2; }
-            main.max-w-md > .warica-card:nth-of-type(3),
-            main.max-w-md > .warica-card:nth-of-type(4) { grid-column: 1 / -1; }
+            main.max-w-md > .warica-card:nth-of-type(3) { grid-column: 1 / -1; }
         }
 
         /* Hide scrollbars for slick horizontal scroll */
@@ -161,17 +159,6 @@
             </button>
         </div>
     </header>
-
-    <!-- Ad Space Header Banner (Monetization Placeholder) -->
-    <div class="w-full max-w-md px-5 my-1">
-        <div class="w-full bg-slate-100 border border-dashed border-slate-300 rounded-2xl py-2.5 px-4 flex items-center justify-between text-xs text-slate-400">
-            <div class="flex items-center gap-2">
-                <span class="bg-slate-200 text-slate-500 text-[9px] font-bold px-1.5 py-0.5 rounded">スポンサー</span>
-                <span class="text-[11px] truncate max-w-[200px]">美味しいケーキのお取り寄せ特集</span>
-            </div>
-            <i class="fa-solid fa-chevron-right text-[10px]"></i>
-        </div>
-    </div>
 
     <!-- Main Content Container -->
     <main class="w-full max-w-md px-5 py-2 flex flex-col gap-4 flex-1">
@@ -291,15 +278,6 @@
             </div>
         </div>
 
-        <!-- In-Content Ad Banner (Google AdSense Mock) -->
-        <div class="w-full warica-card p-3 bg-slate-50 border border-slate-200 flex flex-col items-center justify-center text-center">
-            <span class="text-[9px] font-bold text-slate-400 tracking-wider uppercase mb-1">スポンサーリンク</span>
-            <div class="w-full py-4 bg-white rounded-xl border border-slate-200 flex flex-col items-center gap-1">
-                <span class="text-xs font-bold text-slate-700">プロ絶賛！ケーキが刃にくっつかないパティシエナイフ</span>
-                <span class="text-[10px] text-rose-500 font-bold">Amazonランキング1位獲得！詳細を見る →</span>
-            </div>
-        </div>
-
         <!-- Step 3: SEO Content & Pro Cutting Tips -->
         <div class="warica-card p-5">
             <h2 class="text-sm font-bold text-slate-900 mb-3 flex items-center gap-2">
@@ -334,15 +312,88 @@
 
     </main>
 
-    <!-- Footer & Share Banner -->
+    <!-- Footer & Terms Link -->
     <footer class="w-full max-w-md px-5 py-6 flex flex-col items-center gap-3 text-center border-t border-slate-200 mt-4 bg-white">
         <div class="flex items-center gap-2 text-xs text-slate-500 font-medium">
             <span id="footerBrand">© 等分斬り</span>
             <span>•</span>
-            <a href="#" onclick="alert(tr('便利ツール「等分斬り」は商用利用・共有自由です。')); return false;" class="underline hover:text-slate-800">使い方・利用規約</a>
+            <button id="openTermsModal" class="underline hover:text-slate-800">利用規約</button>
         </div>
         <p class="text-[10px] text-slate-400">誕生日パーティー、クリスマスのケーキ等のカットにご活用ください。</p>
     </footer>
+
+    <!-- Terms Modal (利用規約ポップアップ) -->
+    <div id="termsModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-200">
+        <div class="bg-white w-full max-w-lg max-h-[80vh] rounded-3xl p-6 flex flex-col shadow-2xl overflow-hidden">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                <h3 class="font-bold text-base text-slate-900">利用規約</h3>
+                <button id="closeTermsModal" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 font-bold flex items-center justify-center warica-btn">✕</button>
+            </div>
+            <div class="overflow-y-auto text-xs text-slate-600 leading-relaxed py-4 space-y-3.5 text-left">
+                <p>この利用規約（以下、「本規約」といいます。）は、ウェブサイト「等分斬り」（以下、「本サービス」といいます。）の利用条件を定めるものです。ご利用ユーザーの皆さま（以下、「ユーザー」といいます。）には、本規約に従って本サービスをご利用いただきます。</p>
+                
+                <div>
+                    <strong class="text-slate-800 block mb-1">第1条（適用）</strong>
+                    <p>本規約は、ユーザーと本サービスとの間の、本サービスの利用に関わる一切の関係に適用されるものとします。</p>
+                </div>
+
+                <div>
+                    <strong class="text-slate-800 block mb-1">第2条（禁止事項）</strong>
+                    <p>ユーザーは、本サービスの利用にあたり、以下の行為をしてはなりません。</p>
+                    <ol class="list-decimal list-inside pl-1 space-y-0.5 mt-1 text-slate-500">
+                        <li>法令または公序良俗に違反する行為</li>
+                        <li>犯罪行為に関連する行為</li>
+                        <li>本サービスのサーバー、ネットワーク、またはプログラムの機能を破壊したり妨害したりする行為</li>
+                        <li>本サービスの運営を妨害するおそれのある行為</li>
+                        <li>他のユーザーに関する個人情報等を収集または蓄積する行為</li>
+                        <li>他のユーザーまたは第三者に成りすます行為</li>
+                        <li>本サービスに関連して反社会的勢力に対して直接または間接に利益を供与する行為</li>
+                        <li>その他、本サービスが不適切と判断する行為</li>
+                    </ol>
+                </div>
+
+                <div>
+                    <strong class="text-slate-800 block mb-1">第3条（本サービスの提供の停止等）</strong>
+                    <p>本サービスは、システム保守、天災、通信回線障害、その他運用上・技術上の理由により事前に通知することなく本サービスの提供を停止または中断することができるものとし、これによって生じた損害について一切の責任を負いません。</p>
+                </div>
+
+                <div>
+                    <strong class="text-slate-800 block mb-1">第4条（利用制限）</strong>
+                    <p>ユーザーが本規約に違反した場合または不適切と判断した場合、事前通知なく本サービスの利用を制限することができるものとします。</p>
+                </div>
+
+                <div>
+                    <strong class="text-slate-800 block mb-1">第5条（サービス内容の変更等）</strong>
+                    <p>本サービスは、ユーザーに通知することなくサービス内容を変更または中止することができ、これにより生じた損害について一切の責任を負いません。</p>
+                </div>
+
+                <div>
+                    <strong class="text-slate-800 block mb-1">第6条（利用規約の変更）</strong>
+                    <p>本サービスは、必要と判断した場合にはユーザーに通知することなくいつでも本規約を変更することができるものとします。</p>
+                </div>
+
+                <div>
+                    <strong class="text-slate-800 block mb-1">第7条（権利義務の譲渡の禁止）</strong>
+                    <p>ユーザーは、本サービスの承諾なく権利もしくは義務を第三者に譲渡し、または担保に供することはできません。</p>
+                </div>
+
+                <div>
+                    <strong class="text-slate-800 block mb-1">第8条（免責事項）</strong>
+                    <p>1. ガイドライン表示および等分計算の精度やカメラ機能の動作について完全性・正確性を保証するものではありません。実際の切り分けの際のお怪我やケーキの破損等を含め、本サービスの利用により生じた損害について責任を負いません。</p>
+                    <p>2. 第三者コンテンツの利用および外部リンクアクセスにより生じた損害について責任を負いません。</p>
+                    <p>3. 不正アクセスやウイルス等により生じた損害について責任を負いません。</p>
+                </div>
+
+                <div>
+                    <strong class="text-slate-800 block mb-1">第9条（準拠法・裁判管轄）</strong>
+                    <p>本規約の解釈にあたっては日本法を準拠法とし、紛争が生じた場合は本サービス運営者の所在地を管轄する裁判所を専属的合意管轄とします。</p>
+                </div>
+            </div>
+            <div class="pt-3 border-t border-slate-100 flex justify-end">
+                <button id="confirmTermsBtn" class="w-full py-2.5 rounded-xl bg-slate-900 text-white font-bold text-xs warica-btn">閉じる</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Toast Notification Box -->
     <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-900 text-white px-4 py-2.5 rounded-2xl text-xs font-bold shadow-2xl transition-all duration-300 opacity-0 pointer-events-none translate-y-4 z-50 flex items-center gap-2">
@@ -381,11 +432,6 @@
             '中心固定・ピンチまたは下のバーでサイズ調整': ['中心固定・ピンチまたは下のバーでサイズ調整', 'Center fixed · Pinch or use the slider below to resize', '中心固定 · 双指缩放或用下方滑块调整大小', 'Centro fijo · Pellizca o usa el control inferior para cambiar el tamaño', 'Centro fixo · Use pinça ou o controle abaixo para ajustar o tamanho'],
             'ガイドの大きさ': ['ガイドの大きさ', 'Guide size', '辅助线大小', 'Tamaño de la guía', 'Tamanho do guia'],
             'リセット': ['リセット', 'Reset', '重置', 'Restablecer', 'Redefinir'],
-            'スポンサー': ['スポンサー', 'Sponsor', '赞助', 'Patrocinador', 'Patrocinador'],
-            '美味しいケーキのお取り寄せ特集': ['美味しいケーキのお取り寄せ特集', 'Featured cakes delivered to you', '精选美味蛋糕配送', 'Selección de pasteles a domicilio', 'Seleção de bolos entregues em casa'],
-            'スポンサーリンク': ['スポンサーリンク', 'Sponsored link', '赞助链接', 'Enlace patrocinado', 'Link patrocinado'],
-            'プロ絶賛！ケーキが刃にくっつかないパティシエナイフ': ['プロ絶賛！ケーキが刃にくっつかないパティシエナイフ', 'Chef-approved knife that keeps cake from sticking', '专业推荐：不易粘蛋糕的裱花刀', 'Cuchillo profesional que evita que el pastel se pegue', 'Faca profissional que evita que o bolo grude'],
-            'Amazonランキング1位獲得！詳細を見る →': ['Amazonランキング1位獲得！詳細を見る →', 'Top-ranked on Amazon! Learn more →', '亚马逊畅销榜第一！了解详情 →', '¡N.º 1 en Amazon! Ver detalles →', 'N.º 1 na Amazon! Ver detalhes →'],
             'ケーキをプロ並みに美しく切るコツ': ['ケーキをプロ並みに美しく切るコツ', 'Tips for beautifully cutting cake like a pro', '像专业人士一样漂亮切蛋糕的技巧', 'Consejos para cortar pasteles como un profesional', 'Dicas para cortar bolos como um profissional'],
             '1. ナイフを温める': ['1. ナイフを温める', '1. Warm the knife', '1. 温热刀具', '1. Calienta el cuchillo', '1. Aqueça a faca'],
             'お湯でナイフ（包丁）を温めてから水気を拭き取って切ると、クリームやチョコレートが綺麗に溶けて美しい断面になります。': ['お湯でナイフ（包丁）を温めてから水気を拭き取って切ると、クリームやチョコレートが綺麗に溶けて美しい断面になります。', 'Warm the knife in hot water and wipe it dry before cutting for cleaner slices through cream and chocolate.', '先用热水温热刀具并擦干，再切蛋糕，奶油和巧克力の切面会更整齐。', 'Calienta el cuchillo con agua caliente y sécalo antes de cortar para lograr cortes limpios en la crema y el chocolate.', 'Aqueça a faca em água quente e seque-a antes de cortar para obter fatias limpas de creme e chocolate.'],
@@ -393,13 +439,12 @@
             '1カットごとに温かいおしぼりやキッチンペーパーで包丁に付いたクリームをきれいに拭き取るのがプロの鉄則です。': ['1カットごとに温かいおしぼりやキッチンペーパーで包丁に付いたクリームをきれいに拭き取るのがプロの鉄則です。', 'Wipe cream from the blade with a warm towel or kitchen paper after every cut.', '每切一刀后，用温热的毛巾或厨房纸擦净刀上的奶油。', 'Limpia la crema de la hoja con una toalla tibia o papel de cocina después de cada corte.', 'Limpe o creme da lâmina com uma toalha morna ou papel-toalha após cada corte.'],
             '3. イチゴなど固いトッピングの位置': ['3. イチゴなど固いトッピングの位置', '3. Position of firm toppings like strawberries', '3. 草莓等较硬装饰物的位置', '3. Posición de coberturas firmes como fresas', '3. Posição de coberturas firmes, como morangos'],
             'フルーツがある場合は、先にトッピングを避けるか、ナイフを少し前後するように刃を入れて切ると潰れにくくなります。': ['フルーツがある場合は、先にトッピングを避けるか、ナイフを少し前後するように刃を入れて切ると潰れにくくなります。', 'Avoid fruit toppings first, or use a gentle sawing motion to keep them from getting crushed.', '遇到水果装饰时，可先避开水果，或轻轻前後移动刀刃，减少压坏。', 'Aparta primero la fruta o corta con un suave movimiento de sierra para evitar aplastarla.', 'Afaste as frutas primeiro ou use um leve movimento de serra para evitar esmagá-las.'],
-            '使い方・利用規約': ['使い方・利用規約', 'How to use · Terms', '使用方法 · 使用条款', 'Cómo usar · Términos', 'Como usar · Termos'],
+            '利用規約': ['利用規約', 'Terms of Service', '使用条款', 'Términos de servicio', 'Termos de serviço'],
             '誕生日パーティー、クリスマスのケーキ等のカットにご活用ください。': ['誕生日パーティー、クリスマスのケーキ等のカットにご活用ください。', 'Use this guide for birthday, Christmas, and other celebration cakes.', '可用于生日、圣诞节及其他庆祝活动的蛋糕切分。', 'Usa esta guía para pasteles de cumpleaños, Navidad y otras celebraciones.', 'Use este guia para bolos de aniversário, Natal e outras comemorações.'],
             'URLをコピーしました！': ['URLをコピーしました！', 'URL copied!', '已复制网址！', '¡URL copiada!', 'URL copiada!'],
             'カメラの起動に失敗しました（権限をご確認ください）': ['カメラの起動に失敗しました（権限をご確認ください）', 'Could not start camera (check permissions)', '无法启动相机（请检查权限）', 'No se pudo iniciar la cámara (comprueba los permisos)', 'Não foi possível iniciar a câmera (verifique as permissões)'],
             '等分斬り | ケーキカットガイド': ['等分斬り | ケーキカットガイド', 'Toubungiri | Cake Cutting Guide', 'Toubungiri | 蛋糕切分指南', 'Toubungiri | Guía para cortar pasteles', 'Toubungiri | Guia de corte de bolos'],
             'ケーキを綺麗に等分できるWebアプリ！': ['ケーキを綺麗に等分できるWebアプリ！', 'A web app to divide cakes neatly and evenly!', '帮助你均匀切分蛋糕的网页应用！', '¡Una aplicación web para repartir pasteles en porciones iguales!', 'Um aplicativo web para dividir bolos em porções iguais!'],
-            '便利ツール「等分斬り」は商用利用・共有自由です。': ['便利ツール「等分斬り」は商用利用・共有自由です。', 'Toubungiri is a free utility for commercial use and sharing.', '工具「Toubungiri」可自由用于商业用途和分享。', 'La herramienta Toubungiri puede compartirse y usarse comercialmente.', 'A ferramenta Toubungiri pode ser compartilhada e usada comercialmente.'],
             '合計のピース数': ['合計のピース数', 'total pieces', '总份数', 'porciones en total', 'porções no total']
         };
         const originalTextNodes = new WeakMap();
@@ -484,6 +529,28 @@
         const cameraBtnLabel = document.getElementById('cameraBtnLabel');
         const toast = document.getElementById('toast');
         const toastMsg = document.getElementById('toastMsg');
+
+        // Modal Elements
+        const termsModal = document.getElementById('termsModal');
+        const openTermsModal = document.getElementById('openTermsModal');
+        const closeTermsModal = document.getElementById('closeTermsModal');
+        const confirmTermsBtn = document.getElementById('confirmTermsBtn');
+
+        function toggleTermsModal(show) {
+            if (show) {
+                termsModal.classList.remove('opacity-0', 'pointer-events-none');
+            } else {
+                termsModal.classList.add('opacity-0', 'pointer-events-none');
+            }
+        }
+
+        openTermsModal.addEventListener('click', () => toggleTermsModal(true));
+        closeTermsModal.addEventListener('click', () => toggleTermsModal(false));
+        confirmTermsBtn.addEventListener('click', () => toggleTermsModal(false));
+        termsModal.addEventListener('click', (e) => {
+            if (e.target === termsModal) toggleTermsModal(false);
+        });
+
         applyCakeLanguage(savedLanguagePreference);
 
         // Resize Canvas to fit wrapper
