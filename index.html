@@ -253,14 +253,6 @@
                 <!-- Real-time Video Background -->
                 <video id="webcamVideo" autoplay playsinline class="absolute inset-0 w-full h-full object-cover hidden"></video>
 
-                <!-- Mock Interactive Demo Cake (When camera is off) -->
-                <div id="mockCakeView" class="absolute inset-0 flex items-center justify-center transition-opacity duration-300">
-                    <div id="mockCakeBody" class="w-3/4 h-3/4 rounded-full bg-gradient-to-tr from-amber-100 via-orange-50 to-amber-200 border-4 border-amber-200/80 shadow-2xl flex items-center justify-center relative">
-                        <div class="absolute inset-2 border-2 border-dashed border-white/80 rounded-full"></div>
-                        <span class="text-4xl drop-shadow-md">🍓</span>
-                    </div>
-                </div>
-
                 <!-- Canvas Layer for Guide Lines -->
                 <canvas id="guideCanvas" class="absolute inset-0 w-full h-full z-10 cursor-default"></canvas>
 
@@ -362,7 +354,7 @@
         // Built-in translations; no translation API or paid service is required.
         const LANGS = ['ja', 'en', 'zh', 'es', 'pt'];
         const TRANSLATIONS = {
-            '等分斬り | ケーキをきれいに等分': ['等分斬り | ケーキをきれいに等分', 'Cake Samurai | Cake Cutting Guide', 'Cake Samurai | 蛋糕均分指南', 'Cake Samurai | Guía para cortar pasteles', 'Cake Samurai | Guia para cortar bolos'],
+            '等分斬り | ケーキをきれいに等分': ['等分斬り | ケーキをきれいに等分', 'Toubungiri | Cake Cutting Guide', 'Toubungiri | 蛋糕均分指南', 'Toubungiri | Guía para cortar pasteles', 'Toubungiri | Guia para cortar bolos'],
             'ケーキを喧嘩せずに綺麗に等分': ['ケーキを喧嘩せずに綺麗に等分', 'Share cake fairly and neatly', '轻松均匀地分切蛋糕', 'Reparte el pastel de forma justa', 'Divida o bolo de forma justa'],
             '自動 / Auto': ['自動 / Auto', 'Auto', '自动', 'Automático', 'Automático'],
             '1. カット設定': ['1. カット設定', '1. Cutting settings', '1. 切分设置', '1. Ajustes de corte', '1. Configurações de corte'],
@@ -405,9 +397,9 @@
             '誕生日パーティー、クリスマスのケーキ等のカットにご活用ください。': ['誕生日パーティー、クリスマスのケーキ等のカットにご活用ください。', 'Use this guide for birthday, Christmas, and other celebration cakes.', '可用于生日、圣诞节及其他庆祝活动的蛋糕切分。', 'Usa esta guía para pasteles de cumpleaños, Navidad y otras celebraciones.', 'Use este guia para bolos de aniversário, Natal e outras comemorações.'],
             'URLをコピーしました！': ['URLをコピーしました！', 'URL copied!', '已复制网址！', '¡URL copiada!', 'URL copiada!'],
             'カメラの起動に失敗しました（権限をご確認ください）': ['カメラの起動に失敗しました（権限をご確認ください）', 'Could not start camera (check permissions)', '无法启动相机（请检查权限）', 'No se pudo iniciar la cámara (comprueba los permisos)', 'Não foi possível iniciar a câmera (verifique as permissões)'],
-            '等分斬り | ケーキカットガイド': ['等分斬り | ケーキカットガイド', 'Cake Samurai | Cake Cutting Guide', 'Cake Samurai | 蛋糕切分指南', 'Cake Samurai | Guía para cortar pasteles', 'Cake Samurai | Guia de corte de bolos'],
+            '等分斬り | ケーキカットガイド': ['等分斬り | ケーキカットガイド', 'Toubungiri | Cake Cutting Guide', 'Toubungiri | 蛋糕切分指南', 'Toubungiri | Guía para cortar pasteles', 'Toubungiri | Guia de corte de bolos'],
             'ケーキを綺麗に等分できるWebアプリ！': ['ケーキを綺麗に等分できるWebアプリ！', 'A web app to divide cakes neatly and evenly!', '帮助你均匀切分蛋糕的网页应用！', '¡Una aplicación web para repartir pasteles en porciones iguales!', 'Um aplicativo web para dividir bolos em porções iguais!'],
-            '便利ツール「等分斬り」は商用利用・共有自由です。': ['便利ツール「等分斬り」は商用利用・共有自由です。', 'Cake Samurai is a free utility for commercial use and sharing.', '工具「Cake Samurai」可自由用于商业用途和分享。', 'La herramienta Cake Samurai puede compartirse y usarse comercialmente.', 'A ferramenta Cake Samurai pode ser compartilhada e usada comercialmente.'],
+            '便利ツール「等分斬り」は商用利用・共有自由です。': ['便利ツール「等分斬り」は商用利用・共有自由です。', 'Toubungiri is a free utility for commercial use and sharing.', '工具「Toubungiri」可自由用于商业用途和分享。', 'La herramienta Toubungiri puede compartirse y usarse comercialmente.', 'A ferramenta Toubungiri pode ser compartilhada e usada comercialmente.'],
             '合計のピース数': ['合計のピース数', 'total pieces', '总份数', 'porciones en total', 'porções no total']
         };
         const originalTextNodes = new WeakMap();
@@ -430,7 +422,7 @@
             window.currentCakeLanguage = LANGS.includes(language) ? language : 'ja';
             document.documentElement.lang = window.currentCakeLanguage === 'zh' ? 'zh-CN' : window.currentCakeLanguage;
             document.title = tr('等分斬り | ケーキをきれいに等分');
-            const brand = window.currentCakeLanguage === 'ja' ? '等分斬り' : 'Cake Samurai';
+            const brand = window.currentCakeLanguage === 'ja' ? '等分斬り' : 'Toubungiri';
             const brandName = document.getElementById('brandName');
             const footerBrand = document.getElementById('footerBrand');
             if (brandName) brandName.textContent = brand;
@@ -488,8 +480,6 @@
         const sizeSlider = document.getElementById('sizeSlider');
         const sizeValue = document.getElementById('sizeValue');
         const webcamVideo = document.getElementById('webcamVideo');
-        const mockCakeView = document.getElementById('mockCakeView');
-        const mockCakeBody = document.getElementById('mockCakeBody');
         const toggleCameraBtn = document.getElementById('toggleCameraBtn');
         const cameraBtnLabel = document.getElementById('cameraBtnLabel');
         const toast = document.getElementById('toast');
@@ -652,16 +642,6 @@
                 btn.classList.remove('border-slate-200', 'text-slate-600');
 
                 state.shape = btn.dataset.shape;
-
-                // Adjust mock graphic
-                if (state.shape === 'circle') {
-                    mockCakeBody.className = "w-3/4 h-3/4 rounded-full bg-gradient-to-tr from-amber-100 via-orange-50 to-amber-200 border-4 border-amber-200/80 shadow-2xl flex items-center justify-center relative";
-                } else if (state.shape === 'square') {
-                    mockCakeBody.className = "w-3/4 h-3/4 rounded-3xl bg-gradient-to-tr from-amber-100 via-orange-50 to-amber-200 border-4 border-amber-200/80 shadow-2xl flex items-center justify-center relative";
-                } else {
-                    mockCakeBody.className = "w-5/6 h-1/2 rounded-2xl bg-gradient-to-tr from-amber-100 via-orange-50 to-amber-200 border-4 border-amber-200/80 shadow-2xl flex items-center justify-center relative";
-                }
-
                 updateSlices(state.slices);
             });
         });
@@ -707,7 +687,6 @@
                     state.cameraStream.getTracks().forEach(track => track.stop());
                 }
                 webcamVideo.classList.add('hidden');
-                mockCakeView.classList.remove('hidden');
                 state.isCameraOn = false;
                 cameraBtnLabel.textContent = tr('カメラで重ねる');
                 toggleCameraBtn.classList.remove('bg-emerald-600');
@@ -720,7 +699,6 @@
                     webcamVideo.srcObject = stream;
                     state.cameraStream = stream;
                     webcamVideo.classList.remove('hidden');
-                    mockCakeView.add('hidden');
                     state.isCameraOn = true;
                     cameraBtnLabel.textContent = tr('カメラ停止');
                     toggleCameraBtn.classList.remove('bg-slate-900');
@@ -775,7 +753,7 @@
         document.getElementById('shareBtn').addEventListener('click', () => {
             if (navigator.share) {
                 navigator.share({
-                    title: tr('Cake Divider | ケーキカットガイド'),
+                    title: tr('等分斬り | ケーキカットガイド'),
                     text: tr('ケーキを綺麗に等分できるWebアプリ！'),
                     url: window.location.href,
                 }).catch(() => {});
